@@ -1,2 +1,3 @@
-echo "date is $PWD"
-echo "date is $(pwd)"
+
+echo "date is $(date)"
+echo "file created at $(date)"

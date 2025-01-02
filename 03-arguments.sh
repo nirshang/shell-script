@@ -1,7 +1,7 @@
 #!/bin/bash
-name=$1
-country=$2
+PERSON1=Ramesh
+PERSON2=Suresh
 
-echo "my name is $name"
-echo "I am from $country"
-echo "Hello all"
+echo "my name is $PERSON1. What is your name."
+echo "I am $PERSON2. How are you $PERSON1"
+echo "I am great. How are your $PERSON2"

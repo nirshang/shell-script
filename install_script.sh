@@ -5,3 +5,8 @@ if [ $USERID -ne 0 ];then
    exit 1
 fi
 dnf install mysql -y
+if [ $? -ne 0];then 
+   echo "mysql installing is Failure"
+else 
+echo "mysql installing is Success.
+fi

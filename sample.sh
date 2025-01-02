@@ -1,5 +1,5 @@
 #!/bin/bash
-set -xv
+#set -xv
 USERID=$(id -u)
 if [ $USER -ne 0 ];then
    echo "ERROR:you have to have root previlises to run"

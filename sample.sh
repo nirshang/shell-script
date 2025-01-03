@@ -17,9 +17,10 @@ if [ $USERID -ne 0 ];then
 fi
 
 dnf list installed mysql
-if [ $? -ne 0 ];then
+if [ $? -ne 0 ]
+then
    dnf install mysql -y
-   VaLIDATE $? "installing mysql"
+   VALIDATE $? "installing mysql"
 else 
     echo "mysql is already installed"
 fi

@@ -1,7 +1,6 @@
 #!/bin/bash
 #set -xv
 USERID=$(id -u)
-
 VALIDATE(){
     if [  -$1 ne 0 ]
    then

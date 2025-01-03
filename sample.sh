@@ -11,7 +11,7 @@ VALIDATE(){
     fi
 }
 
-if [ $USERID-ne 0 ];then
+if [ $USERID -ne 0 ];then
    echo "ERROR:you have to have root previlises to run"
    exit 1
 fi

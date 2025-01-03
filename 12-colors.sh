@@ -1,5 +1,5 @@
 #!/bin/bash
-set -xv
+#set -xv
 USERID=$(id -u)
 R="\e[31m"
 G="\e[32m"

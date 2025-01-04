@@ -19,7 +19,7 @@ VALIDATE(){
     fi
 }
 
-echo "script started exicuting at : $TIMESTAMP" &>>$LOG_FILE_NAME
+echo "Script started exicuting at: $TIMSTAMP" &>>$LOG_FILE_NAME
 
 if [ $USERID -ne 0 ];then
    echo "ERROR:you have to have root previlises to run"

@@ -1,14 +1,14 @@
 USERID=(id -u)
 NEW_ROOT_PASSWORD="ExpenseApp@1"
 
-if [ $USERID -ne 0 ]
+if [ $USERID -ne 0 ];
 then
     echo "you do not have root permission to run this"
     exit 1
 fi
 
 dnf list installed mysql-server
-if [ $? -ne 0 ]
+if [ $? -ne 0 ];
 then
     dnf install mysql-server -y
 else

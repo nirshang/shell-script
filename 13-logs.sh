@@ -19,7 +19,6 @@ VALIDATE(){
     fi
 }
 
-LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
 echo "script started exicuting at : $TIMESTAMP" &>>$LOG_FILE_NAME
 
 if [ $USERID -ne 0 ];then

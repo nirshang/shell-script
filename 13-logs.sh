@@ -4,6 +4,8 @@ USERID=$(id -u)
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
+N="\e[34m"
+
 LOGS_FOLDER="/var/log/shellscript-logs"
 LOG_FILE=$(echo $0 | cut -d "." -f1 ) 
 TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S) 

@@ -22,7 +22,7 @@ systemctl enable mysqld
 
 systemctl start mysqld
 
-mysql -h mysql.daws82s.online -u root -pExpenseApp@1 -e 'show databases;
+mysql -h 54.89.41.115 -u root -pExpenseApp@1 -e 'show databases;
 
 if [ $? -ne 0 ]
 then

@@ -1,11 +1,14 @@
 USERID=(id -u)
-NEW_ROOT_PASSWORD="ExpenseApp@1"
+
+#Check_user
 
 if [ $USERID -ne 0 ];
 then
-    echo "you do not have root permission to run this"
+    echo "Error: This command has to be run with superuser privileges (under the root user on most systems)"
     exit 1
 fi
+
+#checking and installing mysql-server
 
 dnf list installed mysql-server
 if [ $? -ne 0 ];
@@ -19,15 +22,13 @@ systemctl enable mysqld
 
 systemctl start mysqld
 
+mysql -h mysql.daws82s.online -u root -pExpenseApp@1 -e 'show databases;
 
-# Run MySQL commands to set the root password and secure the installation
-mysql -u root <<EOF
-ALTER USER 'root'@'localhost' IDENTIFIED BY '${NEW_ROOT_PASSWORD}';
-DELETE FROM mysql.user WHERE User='';
-DROP DATABASE IF EXISTS test;
-DELETE FROM mysql.db WHERE Db='test' OR Db='test_%';
-FLUSH PRIVILEGES;
-EOF
-
-# Output success message
-echo "MySQL root password set and installation secured."
+if [ $? -ne 0 ]
+then
+    echo "MySQL Root password not setup"
+    mysql_secure_installation --set-root-pass ExpenseApp@1
+    
+else
+    echo -e "MySQL Root password already setup ... $Y SKIPPING $N"
+fi

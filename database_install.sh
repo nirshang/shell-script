@@ -1,34 +1,49 @@
+#!/bin/bash
+
 USERID=$(id -u)
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
 
-#Check_user
+LOGS_FOLDER="/var/log/shellscript-logs"
+LOG_FILE=$(echo $0 | cut -d "." -f1 )
+TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
+LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
 
-if [ $USERID -ne 0 ]
-then
-    echo "Error: This command has to be run with superuser privileges (under the root user on most systems)"
-    exit 1
-fi
+VALIDATE(){
+    if [ $1 -ne 0 ]
+    then
+        echo -e "$2 ... $R FAILURE $N"
+        exit 1
+    else
+        echo -e "$2 ... $G SUCCESS $N"
+    fi
+}
+CHECK_ROOT(){
+    if [ $USERID -ne 0 ]
+    then
+      echo "ERROR:: You must have sudo access to execute this script"
+      exit 1 #other than 0
+    fi
 
-#checking and installing mysql-server
+echo "Script started executing at: $TIMESTAMP" &>>$LOG_FILE_NAME
 
-dnf list installed mysql-server
-if [ $? -ne 0 ];
-then
-    dnf install mysql-server -y
-else
-    echo "Mysql already installed"
-fi
+CHECK_ROOT
 
-systemctl enable mysqld
-
-systemctl start mysqld
-
-mysql -h 54.89.41.115 -u root -pExpenseApp@1 -e 'show databases;'
-
+dnf list installed mysql-server &>>$LOG_FILE_NAME
 if [ $? -ne 0 ]
-then
-    echo "MySQL Root password not setup"
-    mysql_secure_installation --set-root-pass ExpenseApp@1
-    
+then 
+  dnf install mysql-server -y &>>$LOG_FILE_NAME
+  VALIDATE $? "installing mysql server"
 else
-    echo -e "MySQL Root password already setup ... $Y SKIPPING $N"
+  echo "mysql-server already installed"
 fi
+
+systemctl enable mysqld &>>$LOG_FILE_NAME
+VALIDATE $? "Enabling mysql server"
+
+systemctl start mysqld &>>$LOG_FILE_NAME
+VALIDATE $? "Starting mysql server"
+
+mysql_secure_installation --set-root-pass ExpenseApp@1

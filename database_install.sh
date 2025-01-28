@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 USERID=$(id -u)
 R="\e[31m"
